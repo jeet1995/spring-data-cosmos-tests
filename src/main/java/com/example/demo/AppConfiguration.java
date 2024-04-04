@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.azure.core.credential.AzureKeyCredential;
+import com.azure.cosmos.CosmosAsyncClient;
 import com.azure.cosmos.CosmosClientBuilder;
 import com.azure.cosmos.CosmosDiagnosticsHandler;
 import com.azure.cosmos.CosmosDiagnosticsThresholds;
@@ -45,12 +46,11 @@ public class AppConfiguration extends AbstractCosmosConfiguration {
     @Bean
     public CosmosClientBuilder getCosmosClientBuilder() {
         this.azureKeyCredential = new AzureKeyCredential(key);
-        DirectConnectionConfig directConnectionConfig = new DirectConnectionConfig();
         GatewayConnectionConfig gatewayConnectionConfig = new GatewayConnectionConfig();
         return new CosmosClientBuilder()
                 .endpoint(uri)
                 .credential(azureKeyCredential)
-                .directMode(directConnectionConfig, gatewayConnectionConfig);
+                .gatewayMode(gatewayConnectionConfig);
     }
 
     @Override
