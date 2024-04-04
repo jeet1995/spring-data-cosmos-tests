@@ -1,0 +1,1 @@
+# spring-data-cosmos-tests
